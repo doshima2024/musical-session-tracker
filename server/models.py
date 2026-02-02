@@ -14,6 +14,9 @@ class Session(db.Model):
 
     def __repr__(self):
         return f"Session id: {self.id} title: {self.title} length: {self.length} started_at: {self.started_at}"
+    
+    def to_dict(self):
+        return {'id': self.id, 'title': self.title, 'length': self.length, 'notes': self.notes, 'started_at': self.started_at}
         
  
 class MusicalIdea(db.Model):
@@ -29,6 +32,7 @@ class MusicalIdea(db.Model):
     session = db.relationship("Session", back_populates="musical_ideas")
 
     def __repr__(self):
-        return f"MusicalIdea id: {self.id} title {self.title} bpm: {self.bpm} key: {self.key} session_id: {self.session_id} "
+        return f"MusicalIdea id: {self.id} title: {self.title} bpm: {self.bpm} key: {self.key} session_id: {self.session_id} "
 
-
+    def to_dict(self):
+        return {'id': self.id, 'title': self.title, 'bpm': self.bpm, 'key': self.key, 'notes': self.notes, 'session_id': self.session_id}
