@@ -1,7 +1,8 @@
-from flask import Flask
+from flask import Flask, jsonify, request
 from flask_migrate import Migrate
 from flask_cors import CORS
 from extensions import db
+from models import *
 
 app = Flask(__name__) # initialize Flask app instance and tell Flask where app is located
 
@@ -14,7 +15,17 @@ db.init_app(app)
 @app.route('/')
 def home():
     return "Server run success."
-    
+
+# GET route to return all sessions
+
+@app.get('/sessions')
+def retrieve_sessions():
+    try:
+        sessions = Session.query.all()
+        return jsonify([session.to_dict() for session in sessions]), 200
+    except Exception as exception:
+        return jsonify({"Error": str(exception)}), 500
+
 
 if app.name == '__main__':
     app.run(debug=True)
