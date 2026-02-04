@@ -81,8 +81,21 @@ def delete_session(id):
         return "", 204
     except Exception:
         app.logger.exception(f"DELETE /sessions/{id} failed")
-        return jsonify({'error': 'Internal Server Error'}), 500
+        return jsonify({'error': 'Internal server Error'}), 500
 
+#GET route to retrieve musical ideas for a given session
+
+@app.get('/sessions/<int:id>/ideas')
+def retrieve_musical_ideas(id):
+    session = Session.query.filter(Session.id == id).first()
+    if session is None:
+        return jsonify({'error': 'session not found '}), 404
+    try:
+        musical_ideas = MusicalIdea.query.filter(MusicalIdea.session_id == id).all()
+        return jsonify([idea.to_dict() for idea in musical_ideas]), 200
+    except Exception:
+        app.logger.exception(f"GET /sessions/{id}/ideas failed")
+        return jsonify({'error': 'Internal server error'}), 500
 
 
 
