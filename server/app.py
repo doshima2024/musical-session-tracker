@@ -27,5 +27,5 @@ def retrieve_sessions():
         return jsonify({"Error": str(exception)}), 500
 
 
-if app.name == '__main__':
+if __name__ == '__main__':
     app.run(debug=True)
