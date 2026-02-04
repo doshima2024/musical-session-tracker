@@ -59,17 +59,29 @@ def create_session():
         return jsonify({'error': 'title and started_at are required fields'}), 400
     
     new_session = Session(title=title, length=length, notes=notes, started_at=started_at)
-    
+
     try:
         db.session.add(new_session)
         db.session.commit()
         return jsonify(new_session.to_dict()), 201
     except Exception:
         app.logger.exception('POST /sessions Failed')
-        return jsonify({'error': 'Internal Service Error'}), 500
+        return jsonify({'error': 'Internal Server Error'}), 500
     
+# DELETE route to delete a session
 
-
+@app.delete('/sessions/<int:id>')
+def delete_session(id):
+    session_to_delete = Session.query.filter(Session.id == id).first()
+    if session_to_delete is None:
+        return jsonify({'error': 'Session not found'}), 404
+    try:
+        db.session.delete(session_to_delete)
+        db.session.commit()
+        return "", 204
+    except Exception:
+        app.logger.exception(f"DELETE /sessions/{id} failed")
+        return jsonify({'error': 'Internal Server Error'}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
