@@ -97,9 +97,38 @@ def retrieve_musical_ideas(id):
         app.logger.exception(f"GET /sessions/{id}/ideas failed")
         return jsonify({'error': 'Internal server error'}), 500
 
+# POST route to create a musical idea:
+
+@app.post('/sessions/<int:id>/ideas')
+def create_musical_idea(id):
+    data = request.json
+    if data is None:
+        return jsonify({'error': 'Invalid or missing JSON'}), 400
+
+    session = Session.query.filter(Session.id == id).first()
+    if session is None:
+        return jsonify({'error': 'session not found'}), 404
+
+    title = data.get('title')
+    bpm = data.get('bpm')
+    key = data.get('key')
+    notes = data.get('notes')
+
+    if not title:
+        return jsonify({'error': 'title is required'}), 400
+    try:
+        musical_idea = MusicalIdea(title=title, bpm=bpm, key=key, notes=notes, session_id=id)
+        db.session.add(musical_idea)
+        db.session.commit()
+        return jsonify(musical_idea.to_dict()), 201
+    except Exception:
+        app.logger.exception(f"POST /sessions/{id}/ideas failed")
+        return jsonify({'error': 'Internal server error'}), 500
 
 
-# DELETE route to delete a musical idea
+
+
+# DELETE route to delete a musical idea:
 
 @app.delete('/ideas/<int:idea_id>')
 def delete_musical_idea(idea_id):
