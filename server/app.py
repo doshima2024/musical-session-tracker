@@ -67,6 +67,34 @@ def create_session():
     except Exception:
         app.logger.exception('POST /sessions Failed')
         return jsonify({'error': 'Internal Server Error'}), 500
+
+# PATCH route to edit a session's notes
+
+@app.patch('/sessions/<int:id>')
+def edit_session_notes(id):
+    data = request.json
+    if data is None:
+        return jsonify({'error': 'Invalid or missing JSON'}), 400
+    
+    session_to_update = Session.query.filter(Session.id == id).first()
+    if session_to_update is None:
+        return jsonify({'error': 'session not found'})
+
+    if "notes" not in data:
+        return jsonify({'error': 'notes is required'}), 400
+
+    try: 
+
+        session_to_update.notes = data["notes"]
+        db.session.commit()
+        return jsonify(session_to_update.to_dict()), 200
+    except Exception:
+        app.logger.exception(f'PATCH /sessions/{id} failed')
+        return jsonify({'error': 'Internal server error'}), 500
+
+
+    
+
     
 # DELETE route to delete a session
 
