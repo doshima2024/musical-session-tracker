@@ -83,5 +83,23 @@ def delete_session(id):
         app.logger.exception(f"DELETE /sessions/{id} failed")
         return jsonify({'error': 'Internal Server Error'}), 500
 
+
+
+
+# DELETE route to delete a musical idea
+
+@app.delete('/ideas/<int:idea_id>')
+def delete_musical_idea(idea_id):
+    idea_to_delete = MusicalIdea.query.filter(MusicalIdea.id == idea_id).first()
+    if idea_to_delete is None:
+        return jsonify({'error': 'Idea not found'}), 404
+    try:
+        db.session.delete(idea_to_delete)
+        db.session.commit()
+        return "", 204
+    except Exception:
+        app.logger.exception(f"DELETE /ideas/{idea_id} failed")
+        return jsonify({'error': 'Internal server Error'}), 500
+
 if __name__ == '__main__':
     app.run(debug=True)
