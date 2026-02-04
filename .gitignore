@@ -1,4 +1,20 @@
-server/.env
+
+# Pipenv / venv
+.venv/
 server/.venv/
+
+# SQLite
+*.db
+*.sqlite
+*.sqlite3
+instance/
+
+# Python
+
 server/__pycache__/
 *.pyc
+.python-version
+
+# Env vars
+.env
+server/.env
