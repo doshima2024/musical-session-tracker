@@ -18,6 +18,7 @@ migrate = Migrate(app, db)
 def home():
     return "Server run success."
 
+<<<<<<< HEAD
 # GET route to return all sessions
 
 @app.get('/sessions')
@@ -30,5 +31,7 @@ def retrieve_sessions():
         return jsonify({"error": str(exception)}), 500
 
 
+=======
+>>>>>>> origin/main
 if __name__ == '__main__':
     app.run(debug=True)

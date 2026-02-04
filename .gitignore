@@ -1,13 +1,24 @@
-server/.env
-server/.venv/
-server/__pycache__/
-*.pyc
 
-# SQLite database files
+# Pipenv / venv
+.venv/
+server/.venv/
+
+# SQLite
 *.db
 *.sqlite
 *.sqlite3
+instance/
+
+# Python
+
+server/__pycache__/
+*.pyc
 
 # Flask instance folder
 instance/
 server/instance/
+.python-version
+
+# Env vars
+.env
+server/.env
