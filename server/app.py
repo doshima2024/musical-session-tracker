@@ -25,9 +25,9 @@ def retrieve_sessions():
     try:
         sessions = Session.query.all()
         return jsonify([session.to_dict() for session in sessions]), 200
-    except Exception as exception:
+    except Exception:
         app.logger.exception("GET /sessions failed")
-        return jsonify({"error": str(exception)}), 500
+        return jsonify({"error": 'Internal server error'}), 500
 
 # GET route to return a specific session, by id
 
@@ -38,9 +38,37 @@ def retrieve_session(id):
         return jsonify({'error': 'session with that ID not found'}), 404
     try:
         return jsonify(session.to_dict()), 200
-    except Exception as exception:
-        app.logger.exception('GET /sessions/<int:id> failed')
-        return jsonify({'error': str(exception)}), 500
+    except Exception:
+        app.logger.exception(f'GET /sessions/{id} failed')
+        return jsonify({'error': 'Internal server error'}), 500
+
+# POST route to create a session:
+
+@app.post('/sessions')
+def create_session():
+    data = request.json
+    if data is None:
+        return jsonify({'error': 'Error retreiving request'}), 400
+
+    title = data.get("title")
+    length = data.get("length")
+    notes = data.get("notes")
+    started_at = data.get("started_at")
+
+    if not title or not started_at:
+        return jsonify({'error': 'title and started_at are required fields'}), 400
+    
+    new_session = Session(title=title, length=length, notes=notes, started_at=started_at)
+    
+    try:
+        db.session.add(new_session)
+        db.session.commit()
+        return jsonify(new_session.to_dict()), 201
+    except Exception:
+        app.logger.exception('POST /sessions Failed')
+        return jsonify({'error': 'Internal Service Error'}), 500
+    
+
 
 
 if __name__ == '__main__':
