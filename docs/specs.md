@@ -41,9 +41,6 @@ Cascade: when a session is deleted, its children Musical_Ideas should also be de
 
 API ROUTES:
 
-BE Implementation order:a. Models
-b. Seed Data/ Test manually with cURL
-c. Routes
 GET /sessions
 
 Response: a JSON array of session objects (each representing a session) [{id: 1, title: “Test Session 1” …..}, {id: 2, title: “Test Session 2” …..}], 200 status code
