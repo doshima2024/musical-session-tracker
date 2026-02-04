@@ -153,9 +153,6 @@ def create_musical_idea(id):
         app.logger.exception(f"POST /sessions/{id}/ideas failed")
         return jsonify({'error': 'Internal server error'}), 500
 
-
-
-
 # DELETE route to delete a musical idea:
 
 @app.delete('/ideas/<int:idea_id>')
