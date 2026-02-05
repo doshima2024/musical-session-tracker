@@ -18,3 +18,12 @@ server/__pycache__/
 # Env vars
 .env
 server/.env
+
+# Front End Files To Ignore
+
+node_modules/
+client/node_modules/
+dist/
+client/dist/
+.env
+
