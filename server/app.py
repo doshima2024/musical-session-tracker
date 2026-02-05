@@ -5,6 +5,7 @@ from extensions import db
 from models import Session, MusicalIdea
 
 app = Flask(__name__) # initialize Flask app instance and tell Flask where app is located
+CORS(app) # enable CORS so React app can communicate with Flask app
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///app.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False

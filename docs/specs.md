@@ -79,6 +79,7 @@ DELETE /ideas/:idea_id (delete a musical idea)
 Request example: DELETE /ideas/5
 
 Response: empty response, 204 status code
+
 FRONTEND ARCHITECTURE PLAN:FE routes:“/“ redirects to “/sessions/“
 “/sessions/“ - displays existing sessions and a form to create a session. Also the ability to delete sessions lives here.“/sessions/:id/“ - “sessions” details page - displays ideas under that session. Includes form for creating musical ideas for that session, and ability to delete a musical idea. Functionality for updating session notes lives here.Components:
 
