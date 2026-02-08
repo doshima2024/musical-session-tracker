@@ -17,7 +17,11 @@ export const SessionDisplayCard = () => {
       <div>{sessions.length === 0 && <p>No sessions to display yet</p>}</div>
       <div>
         {sessions.map(session => (
-          <p key={session.id}>{session.title}</p>
+          <>
+            <p key={session.id}>{session.title}</p>
+            <p key={session.id}>Length: {session.length} seconds</p>
+            <p key={session.id}>Notes: {session.notes}</p>
+          </>
         ))}
       </div>
     </>
