@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import '../App.css';
 
 export const SessionDisplayCard = () => {
   const [sessions, setSessions] = useState([]);
@@ -15,13 +16,13 @@ export const SessionDisplayCard = () => {
   return (
     <>
       <div>{sessions.length === 0 && <p>No sessions to display yet</p>}</div>
-      <div>
+      <div className="sessionDisplayWrapper">
         {sessions.map(session => (
-          <>
-            <p key={session.id}>{session.title}</p>
-            <p key={session.id}>Length: {session.length} seconds</p>
-            <p key={session.id}>Notes: {session.notes}</p>
-          </>
+          <div key={session.id} className="sessionDisplayCard">
+            <p>{session.title}</p>
+            <p>Length: {session.length} seconds</p>
+            <p>Notes: {session.notes}</p>
+          </div>
         ))}
       </div>
     </>
