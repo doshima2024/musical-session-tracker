@@ -3,6 +3,7 @@ from flask_migrate import Migrate
 from flask_cors import CORS
 from extensions import db
 from models import Session, MusicalIdea
+import datetime
 
 app = Flask(__name__) # initialize Flask app instance and tell Flask where app is located
 CORS(app) # enable CORS so React app can communicate with Flask app
@@ -45,8 +46,10 @@ def retrieve_session(id):
 
 # POST route to create a session:
 
+
 @app.post('/sessions')
 def create_session():
+    now_utc = datetime.datetime.now(datetime.timezone.utc)
     data = request.json
     if data is None:
         return jsonify({'error': 'Error retreiving request'}), 400
@@ -54,10 +57,10 @@ def create_session():
     title = data.get("title")
     length = data.get("length")
     notes = data.get("notes")
-    started_at = data.get("started_at")
+    started_at = now_utc.isoformat()
 
-    if not title or not started_at:
-        return jsonify({'error': 'title and started_at are required fields'}), 400
+    if title is None:
+        return jsonify({'error': 'title is required'}), 400
     
     new_session = Session(title=title, length=length, notes=notes, started_at=started_at)
 
