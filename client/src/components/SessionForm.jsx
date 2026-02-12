@@ -7,20 +7,25 @@ export const SessionForm = ({ setSessions }) => {
   const [sessionNotes, setSessionNotes] = useState('');
 
   const handleTitleChange = event => {
-    setSessionTitle(event.target.value);
+    setSessionTitle(event.target.value).trim();
   };
 
   const handleNotesChange = event => {
-    setSessionNotes(event.target.value);
+    setSessionNotes(event.target.value).trim();
   };
 
   const handleLengthChange = event => {
-    setSessionLength(Number(event.target.value));
+    setSessionLength(event.target.value);
   };
 
   const handleSubmitSession = event => {
     event.preventDefault();
-    const newSession = { title: sessionTitle, length: Number(sessionLength), notes: sessionNotes };
+    const newSession = {
+      title: sessionTitle,
+      notes: sessionNotes,
+      // Add length conditionally only if provided, else leave out to avoif sending empty values
+      ...(sessionLength !== '' ? { length: Number(sessionLength) } : {}),
+    };
     fetch('http://127.0.0.1:5000/sessions', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
