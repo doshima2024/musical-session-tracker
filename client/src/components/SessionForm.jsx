@@ -42,24 +42,38 @@ export const SessionForm = ({ onSessionCreated }) => {
   };
 
   return (
-    <div className="sessionFormWrapper">
-      <form className="sessionForm" onSubmit={handleSubmitSession}>
+    <div>
+      <form onSubmit={handleSubmitSession} className="sessionForm">
+        {' '}
+        Add A Session To Your Tracker Workspace:
+        <br></br>
+        <br></br>
         <label>
           {' '}
-          Add A Session To Your Tracker:
+          Enter Session Title:
           <input
             value={sessionTitle}
             onChange={handleTitleChange}
             type="text"
             placeholder="Enter Your Title Here"
           ></input>
+        </label>
+        <label>
+          {' '}
+          Enter Session Length:
           <input
             value={sessionLength}
             type="number"
             placeholder="Enter Length Here"
             onChange={handleLengthChange}
           ></input>
+        </label>
+        <label>
+          {' '}
+          Enter Session Notes:
           <textarea value={sessionNotes} placeholder="Enter Your Notes Here" onChange={handleNotesChange}></textarea>
+        </label>
+        <label>
           <input type="submit" />
         </label>
       </form>

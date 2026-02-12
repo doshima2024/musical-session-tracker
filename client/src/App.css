@@ -25,3 +25,10 @@
   margin-top: 20px;
   margin-bottom: 20px;
 }
+
+.sessionForm {
+  background-color: rgb(169, 217, 201);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
