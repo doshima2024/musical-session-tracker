@@ -14,9 +14,13 @@ export const SessionsPage = () => {
       .catch(error => console.error('Error fetching sessions:', error));
   }, []);
 
+  const onSessionCreated = newlyCreatedSession => {
+    setSessions(prevSessions => [...prevSessions, newlyCreatedSession]);
+  };
+
   return (
     <>
-      <SessionForm setSessions={setSessions} />
+      <SessionForm onSessionCreated={onSessionCreated} />
       <SessionDisplayCard sessions={sessions} />
     </>
   );

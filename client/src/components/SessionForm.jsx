@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../App.css';
 
-export const SessionForm = ({ setSessions }) => {
+export const SessionForm = ({ onSessionCreated }) => {
   const [sessionTitle, setSessionTitle] = useState('');
   const [sessionLength, setSessionLength] = useState('');
   const [sessionNotes, setSessionNotes] = useState('');
@@ -32,11 +32,11 @@ export const SessionForm = ({ setSessions }) => {
       body: JSON.stringify(newSession),
     })
       .then(response => response.json())
-      .then(data => {
+      .then(newlyCreatedSession => {
         setSessionTitle('');
         setSessionLength('');
         setSessionNotes('');
-        setSessions(prevSessions => [...prevSessions, data]);
+        onSessionCreated(newlyCreatedSession);
       })
       .catch(error => console.error('Error adding session', error));
   };
