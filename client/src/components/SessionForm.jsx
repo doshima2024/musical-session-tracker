@@ -27,11 +27,11 @@ export const SessionForm = ({ setSessions }) => {
       body: JSON.stringify(newSession),
     })
       .then(response => response.json())
-      .then(() => {
+      .then(data => {
         setSessionTitle('');
         setSessionLength('');
         setSessionNotes('');
-        setSessions(prevSessions => [...prevSessions, newSession]);
+        setSessions(prevSessions => [...prevSessions, data]);
       })
       .catch(error => console.error('Error adding session', error));
   };
