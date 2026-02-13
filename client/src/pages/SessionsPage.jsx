@@ -14,6 +14,8 @@ export const SessionsPage = () => {
       .catch(error => console.error('Error fetching sessions:', error));
   }, []);
 
+  //callback to append new session to sessions state upon creation for instant visibility in sessions list
+
   const onSessionCreated = newlyCreatedSession => {
     setSessions(prevSessions => [...prevSessions, newlyCreatedSession]);
   };
