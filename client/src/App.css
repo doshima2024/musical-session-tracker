@@ -33,6 +33,10 @@
   align-items: center;
 }
 
-.sessionDisplayTitle {
+.sessionDisplayCardTitle {
+  text-align: center;
+}
+
+.sessionDetailTitle {
   text-align: center;
 }
