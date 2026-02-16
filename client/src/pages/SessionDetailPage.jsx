@@ -32,7 +32,7 @@ export const SessionDetailPage = () => {
   return (
     <>
       <div>
-        <h2 className="sessionDetailTitle">{session?.title}</h2>
+        <h2 className="sessionDetailTitle">You Are Now Viewing Musical Ideas For: {session?.title}</h2>
       </div>
       <MusicalIdeaList sessionId={id} />
     </>
