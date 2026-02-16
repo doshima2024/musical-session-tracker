@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { MusicalIdeaList } from '../components/MusicalIdeaList';
 
 export const SessionDetailPage = () => {
   const [session, setSession] = useState(null);
@@ -29,8 +30,11 @@ export const SessionDetailPage = () => {
   if (!session) return <p>Loading...</p>;
 
   return (
-    <div>
-      <h2 className="sessionDetailTitle">{session?.title}</h2>
-    </div>
+    <>
+      <div>
+        <h2 className="sessionDetailTitle">{session?.title}</h2>
+      </div>
+      <MusicalIdeaList SessionId={id} />
+    </>
   );
 };
