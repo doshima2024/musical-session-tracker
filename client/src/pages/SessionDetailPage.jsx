@@ -34,7 +34,7 @@ export const SessionDetailPage = () => {
       <div>
         <h2 className="sessionDetailTitle">{session?.title}</h2>
       </div>
-      <MusicalIdeaList SessionId={id} />
+      <MusicalIdeaList sessionId={id} />
     </>
   );
 };
