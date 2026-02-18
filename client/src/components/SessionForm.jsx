@@ -7,11 +7,11 @@ export const SessionForm = ({ onSessionCreated }) => {
   const [sessionNotes, setSessionNotes] = useState('');
 
   const handleTitleChange = event => {
-    setSessionTitle(event.target.value).trim();
+    setSessionTitle(event.target.value.trim());
   };
 
   const handleNotesChange = event => {
-    setSessionNotes(event.target.value).trim();
+    setSessionNotes(event.target.value.trim());
   };
 
   const handleLengthChange = event => {
