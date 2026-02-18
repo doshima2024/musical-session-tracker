@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { SessionDisplayCard } from '../components/SessionDisplayCard';
+import { SessionList } from '../components/SessionList';
 import { SessionForm } from '../components/SessionForm';
 
 export const SessionsPage = () => {
@@ -23,7 +23,7 @@ export const SessionsPage = () => {
   return (
     <>
       <SessionForm onSessionCreated={onSessionCreated} />
-      <SessionDisplayCard sessions={sessions} />
+      <SessionList sessions={sessions} />
     </>
   );
 };
