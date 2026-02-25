@@ -7,28 +7,28 @@ export const MusicalIdeaForm = ({ onIdeaCreated, sessionId }) => {
   const [ideaNotes, setIdeaNotes] = useState('');
 
   const onIdeaTitleChange = event => {
-    setIdeaTitle(event.target.value.trim());
+    setIdeaTitle(event.target.value);
   };
 
   const onIdeaBpmChange = event => {
-    setIdeaBpm(event.target.value.trim());
+    setIdeaBpm(event.target.value);
   };
 
   const onIdeaKeyChange = event => {
-    setIdeaKey(event.target.value.trim());
+    setIdeaKey(event.target.value);
   };
 
   const onIdeaNotesChange = event => {
-    setIdeaNotes(event.target.value.trim());
+    setIdeaNotes(event.target.value);
   };
 
   const handleIdeaFormSubmit = event => {
     event.preventDefault();
     const newIdea = {
-      title: ideaTitle,
-      ...(ideaBpm !== '' ? { bpm: ideaBpm } : {}),
-      ...(ideaKey !== '' ? { key: ideaKey } : {}),
-      ...(ideaNotes !== '' ? { notes: ideaNotes } : {}),
+      title: ideaTitle.trim(),
+      ...(ideaBpm.trim() !== '' ? { bpm: ideaBpm.trim() } : {}),
+      ...(ideaKey.trim() !== '' ? { key: ideaKey.trim() } : {}),
+      ...(ideaNotes.trim() !== '' ? { notes: ideaNotes.trim() } : {}),
     };
 
     fetch(`http://127.0.0.1:5000/sessions/${sessionId}/ideas`, {
