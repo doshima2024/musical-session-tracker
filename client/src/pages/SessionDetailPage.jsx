@@ -11,7 +11,7 @@ export const SessionDetailPage = () => {
   const [sessionError, setSessionError] = useState(null);
   const { id } = useParams();
 
-  // fetch the given session on mount for display above Musical Ideas
+  // fetch the given session on mount (or when ID changes) for display above Musical Ideas
   useEffect(() => {
     setSessionError(null); // reset error when id changes
     setSession(null); // trigger "Loading..." when id changes
@@ -30,7 +30,7 @@ export const SessionDetailPage = () => {
       });
   }, [id]);
 
-  // Fetch musical ideas by ID for a given session:
+  // Fetch musical ideas by ID for a given session on mount (or when ID changes):
 
   useEffect(() => {
     setIdeasError(null);
