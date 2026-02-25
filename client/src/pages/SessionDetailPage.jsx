@@ -35,6 +35,7 @@ export const SessionDetailPage = () => {
   useEffect(() => {
     setIdeasError(null);
     setIsIdeasLoading(true);
+    setIdeas([]);
     fetch(`http://127.0.0.1:5000/sessions/${id}/ideas`)
       .then(response => {
         if (!response.ok) {
