@@ -38,7 +38,6 @@ export const MusicalIdeaForm = ({ onIdeaCreated, sessionId }) => {
     })
       .then(response => response.json())
       .then(newlyCreatedIdea => {
-        console.log('NEWLYCREATEDIDEA', newlyCreatedIdea); //DEBUG REMOVE
         setIdeaTitle('');
         setIdeaBpm('');
         setIdeaKey('');
