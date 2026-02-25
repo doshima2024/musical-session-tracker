@@ -57,17 +57,17 @@ export const SessionDetailPage = () => {
   };
 
   if (sessionError) return <p>Error: {sessionError}</p>;
-  if (ideasError) return <p>Error: {ideasError} </p>;
   if (!session) return <p>Loading...</p>;
-  if (isIdeasLoading) return <p>Loading Musical Ideas...</p>;
 
   return (
     <>
       <div>
-        <h2 className="sessionDetailTitle">You Are Now Viewing Musical Ideas For: {session?.title}</h2>
+        <h2 className="sessionDetailTitle">You Are Now Viewing Musical Ideas For: {session.title}</h2>
       </div>
+      {ideasError && <p>Error: {ideasError} </p>}
+      {isIdeasLoading && <p>Loading Musical Ideas...</p>}
       <MusicalIdeaForm onIdeaCreated={onIdeaCreated} sessionId={id} />
-      <MusicalIdeaList ideas={ideas} />
+      {!isIdeasLoading && !ideasError && <MusicalIdeaList ideas={ideas} />}
     </>
   );
 };
