@@ -69,7 +69,7 @@ export const MusicalIdeaForm = ({ onIdeaCreated, sessionId }) => {
         <label>
           {' '}
           Enter Notes:
-          <input type="text-area" value={ideaNotes} onChange={onIdeaNotesChange}></input>
+          <textarea value={ideaNotes} onChange={onIdeaNotesChange}></textarea>
         </label>
         <label>
           <input type="submit"></input>
