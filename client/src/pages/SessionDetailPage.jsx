@@ -57,6 +57,27 @@ export const SessionDetailPage = () => {
     setIdeas(prevIdeas => [...prevIdeas, newlyCreatedIdea]);
   };
 
+  const onIdeaDelete = ideaId => {
+    fetch(`http://127.0.0.1:5000/ideas/${ideaId}`, {
+      method: 'DELETE',
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Request failed: ${response.status}`);
+        }
+      })
+      .then(() => {
+        setIdeasError(null);
+        setIdeas(prevIdeas => {
+          return prevIdeas.filter(idea => ideaId !== idea.id);
+        });
+      })
+      .catch(error => {
+        setIdeasError(error.message);
+        console.error('Error Deleting Idea', error);
+      });
+  };
+
   if (sessionError) return <p>Error: {sessionError}</p>;
   if (!session) return <p>Loading...</p>;
 
@@ -68,7 +89,7 @@ export const SessionDetailPage = () => {
       {ideasError && <p>Error: {ideasError} </p>}
       {isIdeasLoading && <p>Loading Musical Ideas...</p>}
       <MusicalIdeaForm onIdeaCreated={onIdeaCreated} sessionId={id} />
-      {!isIdeasLoading && !ideasError && <MusicalIdeaList ideas={ideas} />}
+      {!isIdeasLoading && !ideasError && <MusicalIdeaList ideas={ideas} onIdeaDelete={onIdeaDelete} />}
     </>
   );
 };

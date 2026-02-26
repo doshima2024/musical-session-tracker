@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const MusicalIdeaDisplayCard = ({ idea }) => {
+export const MusicalIdeaDisplayCard = ({ idea, onIdeaDelete }) => {
   return (
     <>
       <div className="musicalIdeaCardWrapper">
@@ -9,7 +9,7 @@ export const MusicalIdeaDisplayCard = ({ idea }) => {
           <p>BPM: {idea.bpm}</p>
           <p>Key: {idea.key}</p>
           <p>Notes: {idea.notes} </p>
-          <button>Delete Idea</button>
+          <button onClick={() => onIdeaDelete(idea.id)}>Delete Idea</button>
         </div>
       </div>
     </>
