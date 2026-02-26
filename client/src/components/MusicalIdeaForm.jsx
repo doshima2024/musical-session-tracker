@@ -49,7 +49,7 @@ export const MusicalIdeaForm = ({ onIdeaCreated, sessionId }) => {
 
   return (
     <div>
-      <form onSubmit={handleIdeaFormSubmit}>
+      <form onSubmit={handleIdeaFormSubmit} className="ideadeaForm">
         {' '}
         Create A New Musical Idea Entry:
         <label>
