@@ -34,13 +34,34 @@ export const SessionsPage = () => {
     setSessions(prevSessions => [...prevSessions, newlyCreatedSession]);
   };
 
-  if (error) return <p>Error: {error}</p>;
+  const onDeleteSession = id => {
+    fetch(`http://127.0.0.1:5000/sessions/${id}`, {
+      method: 'DELETE',
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Request failed: ${response.status}`);
+        }
+      })
+      .then(() => {
+        setError(null);
+        setSessions(prevSessions => {
+          return prevSessions.filter(session => id !== session.id);
+        });
+      })
+      .catch(error => {
+        setError(error.message);
+        console.error('Error deleting session', error);
+      });
+  };
+
   if (isLoading) return <p>Loading ...</p>;
 
   return (
     <>
+      {error && <p>Error: {error}</p>}
       <SessionForm onSessionCreated={onSessionCreated} />
-      <SessionList sessions={sessions} />
+      <SessionList sessions={sessions} onDeleteSession={onDeleteSession} />
     </>
   );
 };

@@ -2,7 +2,7 @@ import React from 'react';
 import '../App.css';
 import { Link } from 'react-router-dom';
 
-export const SessionDisplayCard = ({ session }) => {
+export const SessionDisplayCard = ({ session, onDeleteSession }) => {
   return (
     <>
       <div className="sessionDisplayWrapper">
@@ -12,6 +12,7 @@ export const SessionDisplayCard = ({ session }) => {
             <p>Length: {session.length} seconds</p>
             <p>Notes: {session.notes}</p>
           </Link>
+          <button onClick={() => onDeleteSession(session.id)}>Delete Session</button>
         </div>
       </div>
     </>

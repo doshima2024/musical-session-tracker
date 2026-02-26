@@ -9,6 +9,7 @@ export const MusicalIdeaDisplayCard = ({ idea }) => {
           <p>BPM: {idea.bpm}</p>
           <p>Key: {idea.key}</p>
           <p>Notes: {idea.notes} </p>
+          <button>Delete Idea</button>
         </div>
       </div>
     </>
