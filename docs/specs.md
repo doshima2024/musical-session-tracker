@@ -60,6 +60,7 @@ E.g: {“id”: 3, “title”: “Test Session 3”, “started_at”: "2026-01
 PATCH /sessions/:id (edit notes of a session)Headers: “Content-Type: application/json”
 
 Request: JSON Object containing updated notes, example {“notes”: “updated notes content”}Response: JSON object representing updated session, example: {“id”: 2, “title”: “Session 2”, “notes”: “updated notes content” ….}, 200 status code
+
 DELETE /sessions/:id
 
 Request example: DELETE /sessions/4

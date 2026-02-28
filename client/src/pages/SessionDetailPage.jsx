@@ -9,6 +9,7 @@ export const SessionDetailPage = () => {
   const [isIdeasLoading, setIsIdeasLoading] = useState(false);
   const [session, setSession] = useState(null);
   const [sessionError, setSessionError] = useState(null);
+  const [editedNotes, setEditedNotes] = useState('');
   const { id } = useParams();
 
   // fetch the given session on mount (or when ID changes) for display above Musical Ideas
@@ -23,7 +24,10 @@ export const SessionDetailPage = () => {
         }
         return response.json();
       })
-      .then(data => setSession(data))
+      .then(data => {
+        setSession(data);
+        setEditedNotes(data.notes ?? '');
+      })
       .catch(error => {
         console.error('Error fetching session', error);
         setSessionError(error.message);
@@ -78,6 +82,10 @@ export const SessionDetailPage = () => {
       });
   };
 
+  const onNotesEdit = event => {
+    setEditedNotes(event.target.value);
+  };
+
   if (sessionError) return <p>Error: {sessionError}</p>;
   if (!session) return <p>Loading...</p>;
 
@@ -85,6 +93,19 @@ export const SessionDetailPage = () => {
     <>
       <div>
         <h2 className="sessionDetailTitle">You Are Now Viewing Musical Ideas For: {session.title}</h2>
+      </div>
+      <div>
+        {editedNotes === null ? (
+          <p>Loading ...</p>
+        ) : (
+          <form>
+            <label>
+              {' '}
+              Edit Session Notes Here:
+              <textarea value={editedNotes} onChange={onNotesEdit}></textarea>
+            </label>
+          </form>
+        )}
       </div>
       {ideasError && <p>Error: {ideasError} </p>}
       {isIdeasLoading && <p>Loading Musical Ideas...</p>}
