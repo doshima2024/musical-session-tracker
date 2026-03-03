@@ -33,11 +33,20 @@
   align-items: center;
 }
 
+.sessionNotesUpdateForm {
+  background-color: rgb(169, 217, 201);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 30px;
+}
+
 .ideadeaForm {
   background-color: rgb(169, 217, 201);
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 10px;
 }
 
 .sessionDisplayCardTitle {

@@ -138,7 +138,7 @@ export const SessionDetailPage = () => {
         <h2 className="sessionDetailTitle">You Are Now Viewing Musical Ideas For: {session.title}</h2>
       </div>
       <div>
-        <form onSubmit={onEditSessionNotesSubmit}>
+        <form onSubmit={onEditSessionNotesSubmit} className="sessionNotesUpdateForm">
           <label>
             {' '}
             Edit Session Notes Here:
