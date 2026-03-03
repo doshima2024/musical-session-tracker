@@ -95,17 +95,13 @@ export const SessionDetailPage = () => {
         <h2 className="sessionDetailTitle">You Are Now Viewing Musical Ideas For: {session.title}</h2>
       </div>
       <div>
-        {editedNotes === null ? (
-          <p>Loading ...</p>
-        ) : (
-          <form>
-            <label>
-              {' '}
-              Edit Session Notes Here:
-              <textarea value={editedNotes} onChange={onNotesEdit}></textarea>
-            </label>
-          </form>
-        )}
+        <form>
+          <label>
+            {' '}
+            Edit Session Notes Here:
+            <textarea value={editedNotes} onChange={onNotesEdit}></textarea>
+          </label>
+        </form>
       </div>
       {ideasError && <p>Error: {ideasError} </p>}
       {isIdeasLoading && <p>Loading Musical Ideas...</p>}
