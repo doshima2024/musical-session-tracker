@@ -10,6 +10,8 @@ export const SessionDetailPage = () => {
   const [session, setSession] = useState(null);
   const [sessionError, setSessionError] = useState(null);
   const [editedNotes, setEditedNotes] = useState('');
+  const [notesEditError, setNotesEditError] = useState(null);
+  const [isNotesSaving, setIsNotesSaving] = useState(false);
   const { id } = useParams();
 
   // fetch the given session on mount (or when ID changes) for display above Musical Ideas
@@ -61,6 +63,8 @@ export const SessionDetailPage = () => {
     setIdeas(prevIdeas => [...prevIdeas, newlyCreatedIdea]);
   };
 
+  // Idea deletion handler
+
   const onIdeaDelete = ideaId => {
     fetch(`http://127.0.0.1:5000/ideas/${ideaId}`, {
       method: 'DELETE',
@@ -82,7 +86,46 @@ export const SessionDetailPage = () => {
       });
   };
 
+  // Submit handler for the edit session notes feature
+
+  const onEditSessionNotesSubmit = event => {
+    event.preventDefault();
+
+    setNotesEditError(null);
+    setIsNotesSaving(true);
+
+    const updatedNotesBody = {
+      notes: editedNotes,
+    };
+
+    fetch(`http://127.0.0.1:5000/sessions/${id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(updatedNotesBody),
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Request failed: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        setSession(data);
+        setEditedNotes(data.notes ?? '');
+      })
+      .catch(error => {
+        console.error('Error updated notes', error);
+        setNotesEditError(error.message);
+      })
+      .finally(() => {
+        setIsNotesSaving(false);
+      });
+  };
+
+  // onChange handler for the edit sessions notes TextArea
+
   const onNotesEdit = event => {
+    setNotesEditError(null);
     setEditedNotes(event.target.value);
   };
 
@@ -95,16 +138,20 @@ export const SessionDetailPage = () => {
         <h2 className="sessionDetailTitle">You Are Now Viewing Musical Ideas For: {session.title}</h2>
       </div>
       <div>
-        <form>
+        <form onSubmit={onEditSessionNotesSubmit}>
           <label>
             {' '}
             Edit Session Notes Here:
             <textarea value={editedNotes} onChange={onNotesEdit}></textarea>
           </label>
+          <button type="submit" disabled={isNotesSaving}>
+            {isNotesSaving ? 'Saving ...' : 'Submit'}
+          </button>
         </form>
       </div>
       {ideasError && <p>Error: {ideasError} </p>}
       {isIdeasLoading && <p>Loading Musical Ideas...</p>}
+      {notesEditError && <p>Error Editing Notes: {notesEditError}</p>}
       <MusicalIdeaForm onIdeaCreated={onIdeaCreated} sessionId={id} />
       {!isIdeasLoading && !ideasError && <MusicalIdeaList ideas={ideas} onIdeaDelete={onIdeaDelete} />}
     </>
