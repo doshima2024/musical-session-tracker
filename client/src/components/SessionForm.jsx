@@ -7,11 +7,11 @@ export const SessionForm = ({ onSessionCreated }) => {
   const [sessionNotes, setSessionNotes] = useState('');
 
   const handleTitleChange = event => {
-    setSessionTitle(event.target.value.trim());
+    setSessionTitle(event.target.value);
   };
 
   const handleNotesChange = event => {
-    setSessionNotes(event.target.value.trim());
+    setSessionNotes(event.target.value);
   };
 
   const handleLengthChange = event => {
@@ -21,9 +21,9 @@ export const SessionForm = ({ onSessionCreated }) => {
   const handleSubmitSession = event => {
     event.preventDefault();
     const newSession = {
-      title: sessionTitle,
-      notes: sessionNotes,
-      // Add length conditionally only if provided, else leave out to avoif sending empty values
+      title: sessionTitle.trim(),
+      notes: sessionNotes.trim(),
+      // Add length conditionally only if provided, else leave out to avoid sending empty values
       ...(sessionLength !== '' ? { length: Number(sessionLength) } : {}),
     };
     fetch('http://127.0.0.1:5000/sessions', {
