@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { SessionList } from '../components/SessionList';
 import { SessionForm } from '../components/SessionForm';
+import { API_URL } from '../config';
 
 export const SessionsPage = () => {
   const [sessions, setSessions] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  console.log('VITE_API_URL:', API_URL);
+
   useEffect(() => {
     setIsLoading(true);
     setError(null);
 
-    fetch('http://127.0.0.1:5000/sessions')
+    fetch(`${API_URL}/sessions`)
       .then(response => {
         if (!response.ok) {
           throw new Error(`Request failed: ${response.status}`);
@@ -35,7 +38,7 @@ export const SessionsPage = () => {
   };
 
   const onDeleteSession = id => {
-    fetch(`http://127.0.0.1:5000/sessions/${id}`, {
+    fetch(`${API_URL}/sessions/${id}`, {
       method: 'DELETE',
     })
       .then(response => {

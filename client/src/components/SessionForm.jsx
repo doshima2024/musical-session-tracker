@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../App.css';
+import { API_URL } from '../config';
 
 export const SessionForm = ({ onSessionCreated }) => {
   const [sessionTitle, setSessionTitle] = useState('');
@@ -26,7 +27,7 @@ export const SessionForm = ({ onSessionCreated }) => {
       // Add length conditionally only if provided, else leave out to avoid sending empty values
       ...(sessionLength !== '' ? { length: Number(sessionLength) } : {}),
     };
-    fetch('http://127.0.0.1:5000/sessions', {
+    fetch(`${API_URL}/sessions`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newSession),

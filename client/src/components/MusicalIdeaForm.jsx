@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { API_URL } from '../config';
 
 export const MusicalIdeaForm = ({ onIdeaCreated, sessionId }) => {
   const [ideaTitle, setIdeaTitle] = useState('');
   const [ideaBpm, setIdeaBpm] = useState('');
   const [ideaKey, setIdeaKey] = useState('');
   const [ideaNotes, setIdeaNotes] = useState('');
+
+  console.log('VITE_API_URL:', API_URL);
 
   const onIdeaTitleChange = event => {
     setIdeaTitle(event.target.value);
@@ -31,7 +34,7 @@ export const MusicalIdeaForm = ({ onIdeaCreated, sessionId }) => {
       ...(ideaNotes.trim() !== '' ? { notes: ideaNotes.trim() } : {}),
     };
 
-    fetch(`http://127.0.0.1:5000/sessions/${sessionId}/ideas`, {
+    fetch(`${API_URL}/sessions/${sessionId}/ideas`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newIdea),

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { MusicalIdeaList } from '../components/MusicalIdeaList';
 import { MusicalIdeaForm } from '../components/MusicalIdeaForm';
+import { API_URL } from '../config';
 
 export const SessionDetailPage = () => {
   const [ideas, setIdeas] = useState([]);
@@ -19,7 +20,7 @@ export const SessionDetailPage = () => {
     setSessionError(null); // reset error when id changes
     setSession(null); // trigger "Loading..." when id changes
 
-    fetch(`http://127.0.0.1:5000/sessions/${id}`)
+    fetch(`${API_URL}/sessions/${id}`)
       .then(response => {
         if (!response.ok) {
           throw new Error(`Request failed: ${response.status}`);
@@ -42,7 +43,7 @@ export const SessionDetailPage = () => {
     setIdeasError(null);
     setIsIdeasLoading(true);
     setIdeas([]);
-    fetch(`http://127.0.0.1:5000/sessions/${id}/ideas`)
+    fetch(`${API_URL}/sessions/${id}/ideas`)
       .then(response => {
         if (!response.ok) {
           throw new Error(`Request failed: ${response.status}`);
@@ -66,7 +67,7 @@ export const SessionDetailPage = () => {
   // Idea deletion handler
 
   const onIdeaDelete = ideaId => {
-    fetch(`http://127.0.0.1:5000/ideas/${ideaId}`, {
+    fetch(`${API_URL}/ideas/${ideaId}`, {
       method: 'DELETE',
     })
       .then(response => {
@@ -98,7 +99,7 @@ export const SessionDetailPage = () => {
       notes: editedNotes,
     };
 
-    fetch(`http://127.0.0.1:5000/sessions/${id}`, {
+    fetch(`${API_URL}/sessions/${id}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(updatedNotesBody),
