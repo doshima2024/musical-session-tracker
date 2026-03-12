@@ -7,8 +7,6 @@ export const MusicalIdeaForm = ({ onIdeaCreated, sessionId }) => {
   const [ideaKey, setIdeaKey] = useState('');
   const [ideaNotes, setIdeaNotes] = useState('');
 
-  console.log('VITE_API_URL:', API_URL);
-
   const onIdeaTitleChange = event => {
     setIdeaTitle(event.target.value);
   };
