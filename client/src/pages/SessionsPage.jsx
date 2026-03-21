@@ -8,8 +8,6 @@ export const SessionsPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  console.log('VITE_API_URL:', API_URL);
-
   useEffect(() => {
     setIsLoading(true);
     setError(null);
