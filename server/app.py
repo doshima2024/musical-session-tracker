@@ -85,7 +85,7 @@ def edit_session_notes(id):
         return jsonify({'error': 'session not found'}), 404
 
     if "notes" not in data:
-        return jsonify({'error': 'notes is required'}), 400
+        return jsonify({'error': 'notes are required'}), 400
 
     try: 
 
