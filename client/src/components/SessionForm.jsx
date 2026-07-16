@@ -7,20 +7,27 @@ export const SessionForm = ({ onSessionCreated }) => {
   const [sessionLength, setSessionLength] = useState('');
   const [sessionNotes, setSessionNotes] = useState('');
 
+  // Function to handle the event at which the user types a title, and update the 'sessionTitle' to that value.
+
   const handleTitleChange = event => {
     setSessionTitle(event.target.value);
   };
 
+  // Same as above, for 'sessionNotes'
+
   const handleNotesChange = event => {
     setSessionNotes(event.target.value);
   };
+
+  // See above
 
   const handleLengthChange = event => {
     setSessionLength(event.target.value);
   };
 
   const handleSubmitSession = event => {
-    event.preventDefault();
+    event.preventDefault(); // Prevent the default behaviour, by which ... (?)
+    // Declare a variable newSession, a dictionary, which sets the vales of title, notes and session length
     const newSession = {
       title: sessionTitle.trim(),
       notes: sessionNotes.trim(),
