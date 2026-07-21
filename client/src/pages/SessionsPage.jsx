@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { SessionList } from '../components/SessionList';
 import { SessionForm } from '../components/SessionForm';
+import { SessionList } from '../components/SessionList';
 import { API_URL } from '../config';
 
 export const SessionsPage = () => {
   const [sessions, setSessions] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  // Fetch (GET) call to retrieve current sessions from the server and set sessions state to the current sessions.
+  // Includes loading and error states to catch errors and properly render during loading time.
 
   useEffect(() => {
     setIsLoading(true);
@@ -29,7 +32,7 @@ export const SessionsPage = () => {
       .finally(() => setIsLoading(false));
   }, []);
 
-  //callback to append new session to sessions state upon creation for instant visibility in sessions list
+  // Callback to append new session to sessions state upon creation for instant visibility in sessions list
 
   const onSessionCreated = newlyCreatedSession => {
     setSessions(prevSessions => [...prevSessions, newlyCreatedSession]);
