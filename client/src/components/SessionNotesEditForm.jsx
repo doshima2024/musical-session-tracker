@@ -55,7 +55,7 @@ export const SessionNotesEditForm = ({ editedNotes, setEditedNotes, id, setSessi
       <div>
         <form onSubmit={onEditSessionNotesSubmit} className="sessionNotesUpdateForm">
           {' '}
-          Edit This Session:
+          <h3>Edit This Session:</h3>
           <label>
             {' '}
             Edit Session Notes Here:
