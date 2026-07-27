@@ -53,7 +53,7 @@ export const SessionForm = ({ onSessionCreated }) => {
     <div>
       <form onSubmit={handleSubmitSession} className="sessionForm">
         {' '}
-        Add A Session To Your Tracker Workspace:
+        <h3>Add A Session To Your Tracker Workspace:</h3>
         <br></br>
         <br></br>
         <label>
