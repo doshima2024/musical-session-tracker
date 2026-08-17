@@ -10,6 +10,7 @@ export const SessionsPage = () => {
 
   // Fetch (GET) call to retrieve current sessions from the server and set sessions state to the current sessions.
   // Includes loading and error states to catch errors and properly render during loading time.
+  // Runs on mount
 
   useEffect(() => {
     setIsLoading(true);
@@ -59,13 +60,17 @@ export const SessionsPage = () => {
       });
   };
 
+  // TODO: finish writing undo delete handler for musical ideas
+
+  const onDeleteUndo = id => {};
+
   if (isLoading) return <p>Loading ...</p>;
 
   return (
     <>
       {error && <p>Error: {error}</p>}
       <SessionForm onSessionCreated={onSessionCreated} />
-      <SessionList sessions={sessions} onDeleteSession={onDeleteSession} />
+      <SessionList sessions={sessions} onDeleteSession={onDeleteSession} onDeleteUndo={onDeleteUndo} />
     </>
   );
 };

@@ -1,5 +1,7 @@
 import React from 'react';
 
+// TODO: Make deletion of musical idea temporary: make onDeleteIdea set a timer after which the idea is ACTUALLY deleted
+
 export const MusicalIdeaDisplayCard = ({ idea, onIdeaDelete }) => {
   return (
     <>

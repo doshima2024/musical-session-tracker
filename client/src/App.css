@@ -75,3 +75,8 @@
   margin-top: 20px;
   margin-bottom: 20px;
 }
+
+.ideaDeleteUndoButtonWrapper {
+  display: grid;
+  align-items: center;
+}
